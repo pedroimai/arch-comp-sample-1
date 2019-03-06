@@ -1,12 +1,12 @@
 package com.pedroimai.archcomp.ui
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSnapHelper
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +50,7 @@ class ContactListFragment : Fragment() {
 
     private fun initRecyclerView(viewModel: SharedContactViewModel) {
         val layoutManager =
-            LinearLayoutManager(activity?.baseContext, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(activity?.baseContext, LinearLayoutManager.HORIZONTAL, false)
 
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(contact_list)

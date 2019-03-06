@@ -1,6 +1,6 @@
 package com.pedroimai.archcomp
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.pedroimai.archcomp.model.Contact
 import com.pedroimai.archcomp.model.SimpleContact
 

@@ -1,7 +1,7 @@
 package com.pedroimai.archcomp.viewmodel
 
 import android.app.Application
-import android.arch.lifecycle.*
+import androidx.lifecycle.*
 import com.pedroimai.archcomp.ArchCompApp
 import com.pedroimai.archcomp.ContactRepository
 import com.pedroimai.archcomp.model.Contact

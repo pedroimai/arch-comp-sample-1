@@ -1,8 +1,8 @@
 package com.pedroimai.archcomp
 
 import android.app.Application
-import android.support.text.emoji.EmojiCompat
-import android.support.text.emoji.bundled.BundledEmojiCompatConfig
+import androidx.emoji.text.EmojiCompat
+import androidx.emoji.bundled.BundledEmojiCompatConfig
 
 class ArchCompApp : Application() {
     private lateinit var executors: AppExecutors
