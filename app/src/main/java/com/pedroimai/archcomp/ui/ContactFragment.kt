@@ -48,7 +48,6 @@ class ContactFragment : Fragment() {
 
             }
         )
-
     }
 
 }
