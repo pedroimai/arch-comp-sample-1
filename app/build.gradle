@@ -29,6 +29,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "boolean", "EXOPACKAGE_FLAGS", "true"
     }
 
     signingConfigs{
@@ -52,27 +53,26 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
-    implementation "androidx.appcompat:appcompat:1.0.2"
-    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "androidx.recyclerview:recyclerview:1.0.0"
-    implementation "androidx.cardview:cardview:1.0.0"
-    implementation "com.google.android.material:material:1.0.0"
-    implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "androidx.emoji:emoji:1.0.0"
-    implementation "androidx.emoji:emoji-bundled:1.0.0"
-    implementation "androidx.emoji:emoji-appcompat:1.0.0"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.emoji:emoji:1.0.0'
+    implementation 'androidx.emoji:emoji-bundled:1.0.0'
+    implementation 'androidx.emoji:emoji-appcompat:1.0.0'
     implementation "org.jetbrains.anko:anko-commons:$versions.anko"
-    implementation "org.jetbrains.anko:anko-design:$versions.anko" // For SnackBars
-
+    implementation "org.jetbrains.anko:anko-design:$versions.anko"
+    implementation "com.android.support:multidex:1.0.3"
+    // For SnackBars
     testImplementation 'junit:junit:4.12'
-
     // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:$versions.architectureComponents"
-
     testImplementation 'androidx.arch.core:core-testing:2.0.0'
-
+    implementation files('libs/buck-android-support.jar')
 }

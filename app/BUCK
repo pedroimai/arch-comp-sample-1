@@ -51,6 +51,7 @@ android_resource(
         '//.okbuck/ext/androidx/loader:loader-1.0.0.aar',
         '//.okbuck/ext/androidx/localbroadcastmanager:localbroadcastmanager-1.0.0.aar',
         '//.okbuck/ext/androidx/media:media-1.0.0.aar',
+        '//.okbuck/ext/androidx/multidex:multidex-2.0.0.aar',
         '//.okbuck/ext/androidx/print:print-1.0.0.aar',
         '//.okbuck/ext/androidx/recyclerview:recyclerview-1.0.0.aar',
         '//.okbuck/ext/androidx/slidingpanelayout:slidingpanelayout-1.0.0.aar',
@@ -80,6 +81,7 @@ android_build_config(
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
         'String VERSION_NAME = "1.0"',
+        'boolean EXOPACKAGE_FLAGS = true',
     ],
     visibility = [
         'PUBLIC',
@@ -93,6 +95,8 @@ okbuck_android_library(
     srcs = glob([
         'src/main/java/**/*.java',
         'src/main/java/**/*.kt',
+    ], exclude = [
+        'src/main/java/com/pedroimai/archcomp/AppShell.java',
     ]),
     source = '7',
     target = '7',
@@ -153,6 +157,7 @@ okbuck_android_library(
         '//.okbuck/ext/androidx/loader:loader-1.0.0.aar',
         '//.okbuck/ext/androidx/localbroadcastmanager:localbroadcastmanager-1.0.0.aar',
         '//.okbuck/ext/androidx/media:media-1.0.0.aar',
+        '//.okbuck/ext/androidx/multidex:multidex-2.0.0.aar',
         '//.okbuck/ext/androidx/print:print-1.0.0.aar',
         '//.okbuck/ext/androidx/recyclerview:recyclerview-1.0.0.aar',
         '//.okbuck/ext/androidx/slidingpanelayout:slidingpanelayout-1.0.0.aar',
@@ -163,6 +168,7 @@ okbuck_android_library(
         '//.okbuck/ext/androidx/versionedparcelable:versionedparcelable-1.0.0.aar',
         '//.okbuck/ext/androidx/viewpager:viewpager-1.0.0.aar',
         '//.okbuck/ext/com/google/android/material:material-1.0.0.aar',
+        '//.okbuck/ext/local:buck-android-support-1.0.0-LOCAL.jar',
         '//.okbuck/ext/org/jetbrains/anko:anko-commons-0.10.8.aar',
         '//.okbuck/ext/org/jetbrains/anko:anko-design-0.10.8.aar',
         '//.okbuck/ext/org/jetbrains/anko:commons-base-0.10.8.aar',
@@ -173,6 +179,43 @@ okbuck_android_library(
         ':build_config_debug',
         ':manifest_lib_debug',
         ':res_debug',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+lib_deps = []
+
+okbuck_android_library(
+    name = 'app_lib_debug',
+    source = '7',
+    target = '7',
+    plugins = [
+        '//.okbuck/workspace/processor:processor_androidx.lifecycle-lifecycle-compiler-2.0.0-beta01',
+    ],
+    provided_deps = [
+        '//.okbuck/workspace/d8:rt-stub.jar',
+    ],
+    extra_arguments = [
+        '-proc:none',
+    ],
+    extra_kotlinc_arguments = [
+        '-Xplugin=buck-out/gen/.okbuck/workspace/kotlin_home/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
+        '-P',
+        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=com.pedroimai.archcomp',
+        '-jvm-target',
+        '1.6',
+        '-no-reflect',
+        '-no-stdlib',
+    ],
+    language = 'kotlin',
+    disable_lint = True,
+
+    srcs = ['src/main/java/com/pedroimai/archcomp/AppShell.java'],
+    deps = [
+        '//.okbuck/ext/local:buck-android-support-1.0.0-LOCAL.jar',
+        ':build_config_debug',
     ],
     visibility = [
         'PUBLIC',
@@ -203,6 +246,8 @@ android_binary(
     manifest_skeleton = ':manifest_bin_debug',
     keystore = ':keystore_debug',
     dex_tool = 'd8',
+    use_split_dex=True,
+    exopackage_modes = ['secondary_dex'],
     package_type = 'debug',
     manifest_entries = {
         'placeholders': {
@@ -210,6 +255,7 @@ android_binary(
         },
     },
     deps = [
+        ':app_lib_debug',
         ':res_debug',
         ':src_debug',
     ],
@@ -266,6 +312,7 @@ android_resource(
         '//.okbuck/ext/androidx/loader:loader-1.0.0.aar',
         '//.okbuck/ext/androidx/localbroadcastmanager:localbroadcastmanager-1.0.0.aar',
         '//.okbuck/ext/androidx/media:media-1.0.0.aar',
+        '//.okbuck/ext/androidx/multidex:multidex-2.0.0.aar',
         '//.okbuck/ext/androidx/print:print-1.0.0.aar',
         '//.okbuck/ext/androidx/recyclerview:recyclerview-1.0.0.aar',
         '//.okbuck/ext/androidx/slidingpanelayout:slidingpanelayout-1.0.0.aar',
@@ -295,6 +342,7 @@ android_build_config(
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
         'String VERSION_NAME = "1.0"',
+        'boolean EXOPACKAGE_FLAGS = true',
     ],
     visibility = [
         'PUBLIC',
@@ -308,6 +356,8 @@ okbuck_android_library(
     srcs = glob([
         'src/main/java/**/*.java',
         'src/main/java/**/*.kt',
+    ], exclude = [
+        'src/main/java/com/pedroimai/archcomp/AppShell.java',
     ]),
     source = '7',
     target = '7',
@@ -368,6 +418,7 @@ okbuck_android_library(
         '//.okbuck/ext/androidx/loader:loader-1.0.0.aar',
         '//.okbuck/ext/androidx/localbroadcastmanager:localbroadcastmanager-1.0.0.aar',
         '//.okbuck/ext/androidx/media:media-1.0.0.aar',
+        '//.okbuck/ext/androidx/multidex:multidex-2.0.0.aar',
         '//.okbuck/ext/androidx/print:print-1.0.0.aar',
         '//.okbuck/ext/androidx/recyclerview:recyclerview-1.0.0.aar',
         '//.okbuck/ext/androidx/slidingpanelayout:slidingpanelayout-1.0.0.aar',
@@ -378,6 +429,7 @@ okbuck_android_library(
         '//.okbuck/ext/androidx/versionedparcelable:versionedparcelable-1.0.0.aar',
         '//.okbuck/ext/androidx/viewpager:viewpager-1.0.0.aar',
         '//.okbuck/ext/com/google/android/material:material-1.0.0.aar',
+        '//.okbuck/ext/local:buck-android-support-1.0.0-LOCAL.jar',
         '//.okbuck/ext/org/jetbrains/anko:anko-commons-0.10.8.aar',
         '//.okbuck/ext/org/jetbrains/anko:anko-design-0.10.8.aar',
         '//.okbuck/ext/org/jetbrains/anko:commons-base-0.10.8.aar',
@@ -388,6 +440,43 @@ okbuck_android_library(
         ':build_config_release',
         ':manifest_lib_release',
         ':res_release',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+lib_deps = []
+
+okbuck_android_library(
+    name = 'app_lib_release',
+    source = '7',
+    target = '7',
+    plugins = [
+        '//.okbuck/workspace/processor:processor_androidx.lifecycle-lifecycle-compiler-2.0.0-beta01',
+    ],
+    provided_deps = [
+        '//.okbuck/workspace/d8:rt-stub.jar',
+    ],
+    extra_arguments = [
+        '-proc:none',
+    ],
+    extra_kotlinc_arguments = [
+        '-Xplugin=buck-out/gen/.okbuck/workspace/kotlin_home/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
+        '-P',
+        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=com.pedroimai.archcomp',
+        '-jvm-target',
+        '1.6',
+        '-no-reflect',
+        '-no-stdlib',
+    ],
+    language = 'kotlin',
+    disable_lint = True,
+
+    srcs = ['src/main/java/com/pedroimai/archcomp/AppShell.java'],
+    deps = [
+        '//.okbuck/ext/local:buck-android-support-1.0.0-LOCAL.jar',
+        ':build_config_release',
     ],
     visibility = [
         'PUBLIC',
@@ -418,6 +507,7 @@ android_binary(
     manifest_skeleton = ':manifest_bin_release',
     keystore = ':keystore_release',
     dex_tool = 'd8',
+    exopackage_modes = ['secondary_dex'],
     package_type = 'release',
     manifest_entries = {
         'placeholders': {
@@ -425,6 +515,7 @@ android_binary(
         },
     },
     deps = [
+        ':app_lib_release',
         ':res_release',
         ':src_release',
     ],

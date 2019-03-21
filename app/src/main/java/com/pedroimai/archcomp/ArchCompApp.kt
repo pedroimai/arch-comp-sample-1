@@ -3,8 +3,9 @@ package com.pedroimai.archcomp
 import android.app.Application
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.bundled.BundledEmojiCompatConfig
+import com.facebook.buck.android.support.exopackage.DefaultApplicationLike
 
-class ArchCompApp : Application() {
+class ArchCompApp(val appContext: Application) : DefaultApplicationLike() {
     private lateinit var executors: AppExecutors
 
     override fun onCreate() {
@@ -18,7 +19,7 @@ class ArchCompApp : Application() {
     }
 
     private fun initEmojiCompat(){
-        val config = BundledEmojiCompatConfig(this)
+        val config = BundledEmojiCompatConfig(this.appContext)
         EmojiCompat.init(config)
     }
 }

@@ -30,6 +30,31 @@ task clean(type: Delete) {
 apply plugin: 'com.uber.okbuck'
 
 okbuck {
+    exopackage = [
+            'app': true
+    ]
+
+    appLibDependencies = [
+            'app': [
+                    'buck-android-support',
+                    'com.android.support:multidex',
+                    'dagger.android'
+            ]
+    ]
+
+    linearAllocHardLimit = [
+            'app': 7194304
+    ]
+    primaryDexPatterns = [
+            'app': [
+                    'com/pedroimai/archcomp/AppShell',
+                    '^com/pedroimai/archcomp/BuildConfig^',
+                    '^android/support/multidex/',
+                    '^com/facebook/buck/android/support/exopackage/'
+            ]
+    ]
+
+
     lint {
         disabled = true
     }

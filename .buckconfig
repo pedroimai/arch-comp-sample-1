@@ -1,3 +1,6 @@
 [android]
     build_tools_version = 28.0.3
     sdk_path = /home/pedroimai/Android/Sdk
+
+
+<file:.okbuck/config/okbuck.buckconfig>
