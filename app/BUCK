@@ -81,7 +81,7 @@ android_build_config(
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
         'String VERSION_NAME = "1.0"',
-        'boolean EXOPACKAGE_FLAGS = true',
+        'int EXOPACKAGE_FLAGS = 1',
     ],
     visibility = [
         'PUBLIC',
@@ -246,8 +246,15 @@ android_binary(
     manifest_skeleton = ':manifest_bin_debug',
     keystore = ':keystore_debug',
     dex_tool = 'd8',
-    use_split_dex=True,
     exopackage_modes = ['secondary_dex'],
+    use_split_dex = True,
+    linear_alloc_hard_limit = 7194304,
+    primary_dex_patterns = [
+        'com/pedroimai/archcomp/AppShell',
+        '^com/pedroimai/archcomp/BuildConfig^',
+        '^android/support/multidex/',
+        '^com/facebook/buck/android/support/exopackage/',
+    ],
     package_type = 'debug',
     manifest_entries = {
         'placeholders': {
@@ -342,7 +349,7 @@ android_build_config(
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
         'String VERSION_NAME = "1.0"',
-        'boolean EXOPACKAGE_FLAGS = true',
+        'int EXOPACKAGE_FLAGS = 0',
     ],
     visibility = [
         'PUBLIC',
@@ -508,6 +515,14 @@ android_binary(
     keystore = ':keystore_release',
     dex_tool = 'd8',
     exopackage_modes = ['secondary_dex'],
+    use_split_dex = True,
+    linear_alloc_hard_limit = 7194304,
+    primary_dex_patterns = [
+        'com/pedroimai/archcomp/AppShell',
+        '^com/pedroimai/archcomp/BuildConfig^',
+        '^android/support/multidex/',
+        '^com/facebook/buck/android/support/exopackage/',
+    ],
     package_type = 'release',
     manifest_entries = {
         'placeholders': {

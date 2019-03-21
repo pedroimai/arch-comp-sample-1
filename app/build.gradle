@@ -29,7 +29,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "boolean", "EXOPACKAGE_FLAGS", "true"
+        multiDexEnabled true
     }
 
     signingConfigs{
@@ -43,11 +43,13 @@ android {
     buildTypes {
         debug{
             signingConfig signingConfigs.debug
+            buildConfigField "int", "EXOPACKAGE_FLAGS", "1"
         }
         release {
             signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "int", "EXOPACKAGE_FLAGS", "0"
         }
     }
 }
