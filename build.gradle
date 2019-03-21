@@ -12,9 +12,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradletools.buildtools"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$gradletools.kotlin"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.uber:okbuck:0.47.0'
     }
 }
 
@@ -27,4 +25,19 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+apply plugin: 'com.uber.okbuck'
+
+okbuck {
+    lint {
+        disabled = true
+    }
+    jetifier {
+        aarOnly = true
+        exclude = [
+                "androidx.*"
+        ]
+    }
+
 }
