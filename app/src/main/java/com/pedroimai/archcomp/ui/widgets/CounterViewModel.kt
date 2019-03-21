@@ -1,16 +1,10 @@
 package com.pedroimai.archcomp.ui.widgets
 
-import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.pedroimai.archcomp.ArchCompApp
-import com.pedroimai.archcomp.ContactRepository
-import com.pedroimai.archcomp.viewmodel.SharedContactViewModel
 
-
-class CounterViewModel(countLimit: Int) : ViewModel() {
-    var state = CounterState.Data(limit = countLimit)
+class CounterViewModel : ViewModel() {
+    var state = CounterState.Data()
         set(value) {
             observableState.value = value
             field = value
@@ -27,13 +21,6 @@ class CounterViewModel(countLimit: Int) : ViewModel() {
                 observableState.value = CounterState.Completed
             }
         }
-    }
-
-    class Factory(private val countLimit: Int) : ViewModelProvider.NewInstanceFactory() {
-
-        override fun <T : ViewModel> create(modelClass: Class<T>): T =
-                CounterViewModel(countLimit) as T
-
     }
 }
 

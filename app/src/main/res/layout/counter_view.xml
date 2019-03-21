@@ -16,9 +16,9 @@
 
     <TextView
         android:id="@+id/txt_counter"
-        app:layout_constraintTop_toTopOf="@id/btn_add"
-        app:layout_constraintLeft_toRightOf="@id/btn_add"
-        app:layout_constraintBottom_toBottomOf="@id/btn_add"
+        app:layout_constraintTop_toTopOf="@+id/btn_add"
+        app:layout_constraintLeft_toRightOf="@+id/btn_add"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="343"/>

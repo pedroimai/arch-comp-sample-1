@@ -29,7 +29,7 @@
             android:gravity="center"
             app:autoSizeMaxTextSize="90sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -42,10 +42,10 @@
             android:layout_height="0dp"
             app:autoSizeMaxTextSize="46sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@id/email"
+            app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:layout_constraintVertical_chainStyle="spread_inside"
             android:text="@string/name_placeholder" />
 
@@ -56,10 +56,10 @@
             android:gravity="center_vertical"
             app:autoSizeMaxTextSize="30sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@id/phone"
+            app:layout_constraintBottom_toTopOf="@+id/phone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@+id/name"
             android:text="@string/email_placeholder" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -72,7 +72,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email"
+            app:layout_constraintTop_toBottomOf="@+id/email"
             android:text="@string/phone_placeholder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
