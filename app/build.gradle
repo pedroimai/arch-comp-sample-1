@@ -17,8 +17,29 @@ ext.versions = [
         architectureComponents: '2.0.0-beta01',
         supportLibrary        : '1.0.0-beta01',
         constraintLayout      : '1.1.2',
+        dagger                : '2.16'
 ]
 
+subprojects {
+    afterEvaluate {
+        def annotationProcessorConfig = configurations.find { it.name == 'annotationProcessor' }
+        if (annotationProcessorConfig != null) {
+            if (annotationProcessorConfig.dependencies.find { it.group == 'com.google.dagger' } != null) {
+                tasks.withType(JavaCompile) {
+                    // JavaPoet already spits out formatted code
+                    // Dagger relies on the Google Java formatter which takes a pretty significant amonut of time to run
+                    // https://github.com/google/dagger/issues/515
+                    options.compilerArgs += ['-Adagger.formatGeneratedSource=disabled']
+                }
+
+                // Buck fails if generated code tries to reference something that is not on classpath, like @Generated annotation.
+                configure(project.dependencies) {
+                    compileOnly libraries.jsr250
+                }
+            }
+        }
+    }
+}
 
 android {
     compileSdkVersion versions.compileSdk
@@ -64,17 +85,33 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.emoji:emoji:1.0.0'
-    implementation 'androidx.emoji:emoji-bundled:1.0.0'
-    implementation 'androidx.emoji:emoji-appcompat:1.0.0'
+    //implementation 'androidx.emoji:emoji:1.0.0'
+ //   implementation 'androidx.emoji:emoji-bundled:1.0.0'
+   // implementation 'androidx.emoji:emoji-appcompat:1.0.0'
     implementation "org.jetbrains.anko:anko-commons:$versions.anko"
     implementation "org.jetbrains.anko:anko-design:$versions.anko"
     implementation "com.android.support:multidex:1.0.3"
+   // implementation "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+
     // For SnackBars
     testImplementation 'junit:junit:4.12'
     // ViewModel and LiveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:$versions.architectureComponents"
+
     testImplementation 'androidx.arch.core:core-testing:2.0.0'
+//    compileOnly 'javax.annotation:jsr250-api:1.0'
+//    implementation 'com.google.guava:guava:27.1-jre'
+//    api 'com.google.guava:guava:27.1-android'
+//    kapt "org.glassfish:javax.annotation:10.0-b28"
+
+    //compileOnly "javax.annotation:jsr250-api:1.0"
+
     implementation files('libs/buck-android-support.jar')
 }

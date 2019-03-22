@@ -40,7 +40,7 @@ class ContactAdapter(private val itemClick: (SimpleContact) -> Unit) :
 
         fun bindContact(contact: SimpleContact) {
             itemView.name.text = contact.name
-            itemView.emoji_picture.text = contact.photo
+           // itemView.emoji_picture.text = contact.photo
             itemView.setOnClickListener { itemClick(contact) }
         }
     }

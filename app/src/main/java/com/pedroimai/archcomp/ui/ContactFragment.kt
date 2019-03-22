@@ -40,7 +40,7 @@ class ContactFragment : Fragment() {
             this,
             Observer<Contact> { contact ->
                 contact?.let {
-                    photo.text = contact.photo
+                   // photo.text = contact.photo
                     name.text = contact.name
                     email.text = contact.email
                     phone.text = contact.phone
